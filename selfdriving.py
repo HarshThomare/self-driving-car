@@ -1,16 +1,15 @@
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
+
 from pathlib import Path
 from sklearn.utils import shuffle
-from sklearn.model_selection import train_test_split
+
 import matplotlib.image as mpimg
 from imgaug import augmenters as iaa
 import os
 import cv2
 import random
-import tensorflow as tf
-from tensorflow.keras import layers
+
 
 
 def DataInfo():
@@ -103,22 +102,6 @@ def batch_gen(path, steeringList, batch, train):
             steeringBatch.append(steering)
         yield (np.asarray(imgBatch), np.asarray(steeringBatch))
 
-
-def create_model():
-    model = tf.keras.Sequential()
-    model.add(layers.Conv2D(24, (5,5), (2,2), input_shape=(66, 200, 3), activation='elu'))
-    model.add(layers.Conv2D(36, (5,5), (2,2), input_shape=(66, 200, 3), activation='elu'))
-    model.add(layers.Conv2D(48, (5,5), (2,2), input_shape=(66, 200, 3), activation='elu'))
-    model.add(layers.Conv2D(64, (3,3),input_shape=(66, 200, 3), activation='elu'))          
-    model.add(layers.Conv2D(64, (3,3),input_shape=(66, 200, 3), activation='elu'))
-    model.add(layers.Flatten())
-    model.add(layers.Dense(100, activation='elu'))
-    model.add(layers.Dense(50, activation='elu'))
-    model.add(layers.Dense(10, activation='elu'))
-    model.add(layers.Dense(1))
-    
-    model.compile(optimizer=tf.keras.optimizers.Adam(lr=0.0001), loss='mse')
-    return model
 
 
 
