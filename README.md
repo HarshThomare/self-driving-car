@@ -26,7 +26,7 @@ The Structure of the model looks as follows:
 The optimizer used was ADAM and the loss was Mean Squared Error.
 # Files
 - `model.py` The script for the model and training
-- `utils.py` The script for image preprocessing
+- `selfdriving.py` The script for image preprocessing
 - `main.py` Runs all the individual scripts
 - `model.h5` The model weights
 - `drive.py` The script to test the model on the simulator
