@@ -23,7 +23,7 @@ The Structure of the model looks as follows:
 - Fully connected: neurons:  10, activation: ELU
 - Fully connected: neurons:   1 (output)
 
-The optimizer used was ADAM and the loss was Sparse Categorical Cross Entropy.
+The optimizer used was ADAM and the loss was Mean Squared Error.
 # Files
 - `model.py` The script for the model and training
 - `utils.py` The script for image preprocessing
