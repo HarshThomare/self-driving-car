@@ -1,22 +1,42 @@
 import tensorflow as tf
 from tensorflow.keras import layers
 import matplotlib.pyplot as plt
+from keras.applications import ResNet50
 
-def create_model():
-    model = tf.keras.Sequential()
-    model.add(layers.Conv2D(24, (5,5), (2,2), input_shape=(66, 200, 3), activation='elu'))
-    model.add(layers.Conv2D(36, (5,5), (2,2), input_shape=(66, 200, 3), activation='elu'))
-    model.add(layers.Conv2D(48, (5,5), (2,2), input_shape=(66, 200, 3), activation='elu'))
-    model.add(layers.Conv2D(64, (3,3),input_shape=(66, 200, 3), activation='elu'))          
-    model.add(layers.Conv2D(64, (3,3),input_shape=(66, 200, 3), activation='elu'))
-    model.add(layers.Flatten())
-    model.add(layers.Dense(100, activation='elu'))
-    model.add(layers.Dense(50, activation='elu'))
-    model.add(layers.Dense(10, activation='elu'))
-    model.add(layers.Dense(1))
+
+
+def create_resnet():
+    resnet = ResNet50(weights='imagenet', include_top=False, input_shape=(100, 100, 3))
+    for layer in resnet.layers[:-4]:
+        layer.trainable = False
+ 
+     return resnet
+
     
-    model.compile(optimizer=tf.keras.optimizers.Adam(lr=0.0001), loss='mse')
-    return model
+def create_model():
+  resnet = create_resnet()
+  
+  model = tf.keras.Sequential()
+  model.add(resnet)
+
+  model.add(layers.Dropout(0.5))
+  
+  model.add(layers.Flatten())
+  
+  model.add(layers.Dense(100, activation='elu'))
+  model.add(layers.Dropout(0.5))
+  
+  model.add(layers.Dense(50, activation='elu'))
+  model.add(layers.Dropout(0.5))
+  
+  model.add(layers.Dense(10, activation='elu'))
+  model.add(layers.Dropout(0.5))
+  
+  model.add(layers.Dense(1))
+  
+  optimizer = tf.keras.optimizers.Adam(lr=1e-3)
+  model.compile(loss='mse', optimizer=optimizer, metrics=['accuracy'])
+  return model
 
 def graph(history):
     plt.plot(history.history['loss'])
