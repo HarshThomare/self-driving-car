@@ -31,6 +31,9 @@ The optimizer used was ADAM and the loss was Mean Squared Error.
 - `model.h5` The model weights
 - `drive.py` The script to test the model on the simulator
 
+## Demo
+https://youtu.be/yF8PFNI-X0A
+
 ## References
 - NVIDIA model: https://devblogs.nvidia.com/parallelforall/deep-learning-self-driving-cars/
 - Udacity Self-Driving Car Simulator: https://github.com/udacity/self-driving-car-sim
