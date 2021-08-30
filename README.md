@@ -12,15 +12,14 @@ Finally, to reduce overfitting, the following augmentation were made:
 The model is a Multilayer Convolutional Neural Network connected to fully connected neural network.
 The Structure of the model looks as follows:
 - Image normalization
-- Convolution: 5x5, filter: 24, strides: 2x2, activation: ELU
-- Convolution: 5x5, filter: 36, strides: 2x2, activation: ELU
-- Convolution: 5x5, filter: 48, strides: 2x2, activation: ELU
-- Convolution: 3x3, filter: 64, strides: 1x1, activation: ELU
-- Convolution: 3x3, filter: 64, strides: 1x1, activation: ELU
+- Resnet 50
 - Drop out (0.5)
 - Fully connected: neurons: 100, activation: ELU
+- Drop out (0.5)
 - Fully connected: neurons:  50, activation: ELU
+- Drop out (0.5)
 - Fully connected: neurons:  10, activation: ELU
+- Drop out (0.5)
 - Fully connected: neurons:   1 (output)
 
 The optimizer used was ADAM and the loss was Mean Squared Error.
